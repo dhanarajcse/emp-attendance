@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance App</title>
+
+    <style>
+    body {
+        font-family: Arial;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        width: 500px;
+        margin: 50px auto;
+
+        /* 🔹 Add padding inside */
+        padding: 25px;
+
+        background-color: white;
+        border-left: 6px solid #007bff;
+
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+        width: 100%;
+
+        /* 🔹 Important fix */
+        box-sizing: border-box;
+
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Employee Attendance</h2>
+
+    <form method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Attendance (P/A):</label>
+        <input type="text" name="attendance" placeholder="P A P P A" required>
+
+        <label>Salary per day:</label>
+        <input type="number" name="salary">
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+        <h3>Result</h3>
+        <p>Name: {{ result.name }}</p>
+        <p>Total Days: {{ result.total }}</p>
+        <p>Present: {{ result.present }}</p>
+        <p>Absent: {{ result.absent }}</p>
+        <p>Percentage: {{ result.percentage }}%</p>
+
+        {% if result.salary %}
+            <p>Salary: ₹{{ result.salary }}</p>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+</body>
+</html>
