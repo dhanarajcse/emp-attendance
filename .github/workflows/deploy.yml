@@ -12,35 +12,32 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    # Step 1: Setup Python (for testing)
+    # Setup Python
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.11"
 
-    # Step 2: Install dependencies
+    # Install dependencies
     - name: Install Dependencies
-      run: |
-        pip install -r requirements.txt
+      run: pip install -r requirements.txt
 
-    # Step 3: Basic test (app runs or not)
+    # Basic test
     - name: Run basic test
-      run: |
-        python -c "import app"
+      run: python -c "import app"
 
-    # Step 4: Login to Docker Hub
+    # Login to Docker Hub (FIXED)
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ dhanarajk }}
-        password: ${{ Springs$1982 }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Step 5: Build Docker image
+    # Build image
     - name: Build Docker Image
       run: docker build -t dhanarajk/attendance-app .
 
-    # Step 6: Push Docker image
+    # Push image
     - name: Push Docker Image
       run: |
-        docker tag dhanarajk/attendance-app dhanarajk/attendance-app:latest
         docker push dhanarajk/attendance-app:latest
