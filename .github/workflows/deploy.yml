@@ -1,0 +1,27 @@
+name: Build & Push Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ dhanarajk }}
+        password: ${{ Springs$1982 }}
+
+    - name: Build Docker Image
+      run: docker build -t dhanarajk/attendance-app .
+
+    - name: Push Docker Image
+      run: |
+        docker tag dhanarajk/attendance-app dhanarajk/attendance-app:latest
+        docker push dhanarajk/attendance-app:latest
