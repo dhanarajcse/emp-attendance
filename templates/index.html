@@ -1,84 +1,88 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Attendance App</title>
-
+    <title>Employee Attendance</title>
     <style>
-    body {
-        font-family: Arial;
-        background-color: #f5f5f5;
-    }
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
 
-    .container {
-        width: 500px;
-        margin: 50px auto;
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-        /* 🔹 Add padding inside */
-        padding: 25px;
+        h2 {
+            text-align: center;
+            color: #333;
+        }
 
-        background-color: white;
-        border-left: 6px solid #007bff;
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    input, button {
-        width: 100%;
+        button:hover {
+            background: #0056b3;
+        }
 
-        /* 🔹 Important fix */
-        box-sizing: border-box;
+        .result {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-        padding: 10px;
-        margin-top: 5px;
-        margin-bottom: 15px;
-    }
+        .result p {
+            margin: 5px 0;
+        }
 
-    button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
+        @media (max-width: 500px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-
     <h2>Employee Attendance</h2>
 
     <form method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required>
-
-        <label>Attendance (P/A):</label>
-        <input type="text" name="attendance" placeholder="P A P P A" required>
-
-        <label>Salary per day:</label>
-        <input type="number" name="salary">
-
+        <input type="text" name="attendance" placeholder="Enter P/A (e.g. P,A,P,A)" required>
         <button type="submit">Calculate</button>
     </form>
 
     {% if result %}
-        <h3>Result</h3>
-        <p>Name: {{ result.name }}</p>
-        <p>Total Days: {{ result.total }}</p>
-        <p>Present: {{ result.present }}</p>
-        <p>Absent: {{ result.absent }}</p>
-        <p>Percentage: {{ result.percentage }}%</p>
-
-        {% if result.salary %}
-            <p>Salary: ₹{{ result.salary }}</p>
-        {% endif %}
+    <div class="result">
+        <p><b>Total Days:</b> {{ result.total }}</p>
+        <p><b>Present:</b> {{ result.present }}</p>
+        <p><b>Absent:</b> {{ result.absent }}</p>
+        <p><b>Percentage:</b> {{ result.percentage }}%</p>
+    </div>
     {% endif %}
-
 </div>
 
 </body>

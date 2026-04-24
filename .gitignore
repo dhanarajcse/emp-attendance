@@ -1,4 +1,46 @@
-__pycache__/
-*.pyc
-venv/
-.env
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Step 1: Setup Python (for testing)
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    # Step 2: Install dependencies
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Step 3: Basic test (app runs or not)
+    - name: Run basic test
+      run: |
+        python -c "import app"
+
+    # Step 4: Login to Docker Hub
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ dhanarajk }}
+        password: ${{ Springs$1982 }}
+
+    # Step 5: Build Docker image
+    - name: Build Docker Image
+      run: docker build -t dhanarajk/attendance-app .
+
+    # Step 6: Push Docker image
+    - name: Push Docker Image
+      run: |
+        docker tag dhanarajk/attendance-app dhanarajk/attendance-app:latest
+        docker push dhanarajk/attendance-app:latest
