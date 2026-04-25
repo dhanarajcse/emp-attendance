@@ -64,7 +64,7 @@
             }
         }
     </style>
-</head>
+</head> 
 <body>
 
 <div class="container">
@@ -77,14 +77,15 @@
     <button type="submit">Calculate</button>
 </form>
 
-    {% if result %}
-    <div class="result">
-        <p><b>Total Days:</b> {{ result.total }}</p>
-        <p><b>Present:</b> {{ result.present }}</p>
-        <p><b>Absent:</b> {{ result.absent }}</p>
-        <p><b>Percentage:</b> {{ result.percentage }}%</p>
-    </div>
+<div class="result">
+    <p><b>Total Days:</b> {{ result.total }}</p>
+    <p><b>Present:</b> {{ result.present }}</p>
+    <p><b>Absent:</b> {{ result.absent }}</p>
+    <p><b>Percentage:</b> {{ result.percentage }}%</p>
+    {% if result.salary %}
+    <p><b>Total Salary:</b> ₹ {{ result.salary }}</p>
     {% endif %}
+</div>
 </div>
 
 </body>
